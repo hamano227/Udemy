@@ -1,2 +1,2 @@
 # Udemy
-# はじめのGIT
+Udemy課題用のリポジトリ
