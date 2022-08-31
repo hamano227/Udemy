@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>TIMER</title>
+</head>
+<body>
+  <div class="container">
+    <p id="timer">00:00:00</p>
+    <div>
+      <button id="start_stop" class="btn btn-lg btn-primary">START</button>
+    </div>
+  </div>
+
+  <script>
+    var start;
+    var timer_id;
+
+
+    document.getElementById("start_stop").addEventListener('click',
+      function () {
+        if (this.innerHTML === 'START') {
+          start = new Date()
+
+          timer_id = setInterval(goTimer, 10);
+
+          this.innerHTML = 'STOP'
+          this.classList.remove('btn-primary')
+          this.classList.add('btn-danger')
+        } else {
+          clearInterval(timer_id);
+          this.innerHTML = 'START'
+          this.classList.remove('btn-danger')
+          this.classList.add('btn-primary')
+        }
+
+
+
+
+
+        function goTimer() {
+
+          var now = new Date();
+          var milli = now.getTime() - start.getTime();
+          var seconds = Math.floor(milli / 1000);
+          var minutes = Math.floor(seconds / 60);
+          var hours = Math.floor(minutes / 60);
+
+          seconds = seconds - minutes * 60;
+          minutes = minutes - hours * 60;
+
+          function addZero(t) {
+            if (t < 10) {
+              t = '0' + t;
+            }
+            return t;
+          }
+
+          document.getElementById('timer').innerHTML = addZero(hours) + ':' + addZero(minutes) + ':' + addZero(seconds);
+        }
+
+        function addZero(t) {
+          if (t < 10) {
+            t = '0' + t
+          }
+          return t;
+        }
+
+
+
+
+      }
+    );
+
+
+
+
+  </script>
+
+</body>
+</html>
